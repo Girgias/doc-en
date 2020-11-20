@@ -7,25 +7,29 @@
  <para>
   <!-- currently using literal pattern as they are the only one accepted but
    if we get pattern matching we should expand this into a separate page -->
-  The <literal>match</literal> expression branches on a literal pattern.
-  Similarly to a <literal>switch</literal> statement, a <literal>match</literal>
-  expression has a scrutinee expression, which is the value to compare to
-  the patterns. The scrutinee expression and the patterns must have the same type.
+  The <literal>match</literal> expression branches evaluation based on an
+  identity check of a value.
+  Similarly to a <literal>switch</literal> statement, a
+  <literal>match</literal> expression has a subject expression that is
+  compared against multiple alternatives.
+  Unlike <literal>switch</literal>, the comparison is an identity check
+  (<code>===</code>) rather than a weak equality check (<code>==</code>).
  </para>
 
  <para>
-  The <literal>match</literal> expression is similar to a <literal>switch</literal>
-  statement but has many some key differences:
+  The <literal>match</literal> expression is similar to a
+  <literal>switch</literal> statement but has some key differences:
   
   <itemizedlist>
    <listitem>
     <simpara>
-     A <literal>match</literal> arm compares values strictly instead as loosely as the switch statement does 
+     A <literal>match</literal> arm compares values strictly instead
+     as loosely as the switch statement does.
     </simpara>
    </listitem>
    <listitem>
     <simpara>
-     A <literal>match</literal> expression returns a value
+     A <literal>match</literal> expression returns a value.
     </simpara>
    </listitem>
    <listitem>
@@ -35,7 +39,7 @@
    </listitem>
    <listitem>
     <simpara>
-     A <literal>match</literal> expression is exhaustive
+     A <literal>match</literal> expression must be exhaustive.
     </simpara>
    </listitem>
   </itemizedlist>
@@ -46,7 +50,7 @@
   <programlisting role="php">
 <![CDATA[
 <?php
-$return_value = match (scrutinee_expression) {
+$return_value = match (subject_expression) {
     single_conditional_expression => return_expression,
     conditional_expression1, conditional_expression2 => return_expression,
 };
@@ -66,7 +70,7 @@ $return_value = match (scrutinee_expression) {
   expressions are executed match arm by match arm.
   In the beginning, no code is executed.
   The conditional expressions are only evaluated if all previous conditional
-  expressions didn't match the scrutinee expression.
+  expressions failed to match the subject expression.
   Only the return expression corresponding to the matching conditional
   expression will be evaluated.
   For example:
