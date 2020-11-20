@@ -12,7 +12,7 @@
   Similarly to a <literal>switch</literal> statement, a
   <literal>match</literal> expression has a subject expression that is
   compared against multiple alternatives.
-  Similarly to nested ternaries, a <literal>match</literal> expression
+  Similarly to ternary expressions, a <literal>match</literal> expression
   returns a value.
   Unlike <literal>switch</literal>, the comparison is an identity check
   (<code>===</code>) rather than a weak equality check (<code>==</code>).
