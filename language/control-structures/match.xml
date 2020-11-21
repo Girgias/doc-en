@@ -5,19 +5,42 @@
  <title><literal>match</literal></title>
  <?phpdoc print-version-for="match"?>
  <para>
-  <!-- currently using literal pattern as they are the only one accepted but
-   if we get pattern matching we should expand this into a separate page -->
   The <literal>match</literal> expression branches evaluation based on an
   identity check of a value.
   Similarly to a <literal>switch</literal> statement, a
   <literal>match</literal> expression has a subject expression that is
-  compared against multiple alternatives.
-  Similarly to ternary expressions, a <literal>match</literal> expression
-  returns a value.
+  compared against multiple alternatives. Unlike <literal>switch</literal>,
+  it will evaluate to a value much like ternary expressions
   Unlike <literal>switch</literal>, the comparison is an identity check
   (<code>===</code>) rather than a weak equality check (<code>==</code>).
   Match expressions are available as of PHP 8.0.0.
  </para>
+
+ <example>
+  <title>Structure of a <literal>match</literal> expression</title>
+  <programlisting role="php">
+   <![CDATA[
+<?php
+$return_value = match (subject_expression) {
+    single_conditional_expression => return_expression,
+    conditional_expression1, conditional_expression2 => return_expression,
+};
+?>
+]]>
+  </programlisting>
+
+  <note>
+   <simpara>
+    The result of a <literal>match</literal> expression does not need to be used.
+   </simpara>
+  </note>
+  <note>
+   <simpara>
+    A <literal>match</literal> expression <emphasis>must</emphasis> be
+    terminated by a semicolon <literal>;</literal>.
+   </simpara>
+  </note>
+ </example>
 
  <para>
   The <literal>match</literal> expression is similar to a
@@ -26,8 +49,8 @@
   <itemizedlist>
    <listitem>
     <simpara>
-     A <literal>match</literal> arm compares values strictly instead
-     as loosely as the switch statement does.
+     A <literal>match</literal> arm compares values strictly (<code>===</code>) instead
+     of loosely as the switch statement does.
     </simpara>
    </listitem>
    <listitem>
@@ -48,32 +71,6 @@
   </itemizedlist>
  </para>
 
- <example>
-  <title>Structure of a <literal>match</literal> expression</title>
-  <programlisting role="php">
-<![CDATA[
-<?php
-$return_value = match (subject_expression) {
-    single_conditional_expression => return_expression,
-    conditional_expression1, conditional_expression2 => return_expression,
-};
-?>
-]]>
-  </programlisting>
-  
-  <note>
-   <simpara>
-    The result of a <literal>match</literal> expression does not need to be used.
-   </simpara>
-  </note>
-  <note>
-   <simpara>
-    A <literal>match</literal> expression <emphasis>must</emphasis> be
-    terminated by a semicolon <literal>;</literal>.
-   </simpara>
-  </note>
- </example>
-
  <para>
   As <literal>switch</literal> statements, <literal>match</literal>
   expressions are executed match arm by match arm.
@@ -89,8 +86,8 @@ $return_value = match (subject_expression) {
 <?php
 $result = match ($x) {
     foo() => ...,
-    $this->bar() => ..., // bar() isn't called if foo() matched with $x
-    $this->baz => ...,
+    $this->bar() => ..., // bar() isn't called if foo() === $x
+    $this->baz => beep(), // beep() isn't called unless $x === $this->baz
     // etc.
 };
 ?>
@@ -99,8 +96,29 @@ $result = match ($x) {
   </informalexample>
  </para>
 
- <!-- TODO Compound arm explanation -->
-
+ <para>
+  <literal>match</literal> expression arms may contain multiple expressions
+  separated by a comma.  That is a logical OR, and is a short-hand for multiple
+  match arms with the same right-hand side.
+ </para>
+ <para>
+  <informalexample>
+   <programlisting role="php">
+    <![CDATA[
+<?php
+$result = match ($x) {
+    // This match arm:
+    $a, $b, $c => 5,
+    // Is equivalent to these three match arms:
+    $a => 5,
+    $b => 5,
+    $c => 5,
+};
+?>
+]]>
+   </programlisting>
+  </informalexample>
+ </para>
  <para>
   A special case is the <literal>default</literal> pattern.
   This pattern matches anything that wasn't previously matched.
@@ -127,7 +145,7 @@ $expressionResult = match ($condition) {
  </para>
 
  <para>
-  A <literal>match</literal> expression must be exhaustive, if the
+  A <literal>match</literal> expression must be exhaustive.  If the
   subject expression is not handled by any match arm an
   <classname>UnhandledMatchError</classname> is thrown.
  </para>
