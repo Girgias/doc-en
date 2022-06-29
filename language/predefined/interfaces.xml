@@ -15,6 +15,7 @@
  &language.predefined.iterator;
  &language.predefined.iteratoraggregate;
  &language.predefined.throwable;
+ &language.predefined.countable;
  &language.predefined.arrayaccess;
  &language.predefined.serializable;
  &language.predefined.closure;
