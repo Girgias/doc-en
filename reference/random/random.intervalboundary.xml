@@ -18,7 +18,6 @@
    <enumsynopsis>
     <enumname>Random\IntervalBoundary</enumname>
     <!-- <modifier role="enum_backing_type">string|int</modifier> -->
-    
     <enumitem>
      <enumidentifier>ClosedOpen</enumidentifier>
      <!--
