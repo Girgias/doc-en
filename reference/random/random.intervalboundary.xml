@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<reference xmlns="http://docbook.org/ns/docbook" xml:id="enum.intervalboundary" role="enum">
- <title>IntervalBoundary</title>
- <titleabbrev>IntervalBoundary</titleabbrev>
+<reference xmlns="http://docbook.org/ns/docbook" xml:id="enum.random-intervalboundary" role="enum">
+ <title>The Random\IntervalBoundary enum</title>
+ <titleabbrev>Random\IntervalBoundary</titleabbrev>
 
  <partintro>
   <section xml:id="enum.intervalboundary.intro">
    &reftitle.intro;
    <simpara>
-    Intro
+    Specifies the type of an interval and thus whether the boundary values lie within the interval.
    </simpara>
   </section>
 
@@ -16,7 +16,7 @@
    &reftitle.classsynopsis;
 
    <enumsynopsis>
-    <enumname>IntervalBoundary</enumname>
+    <enumname>Random\IntervalBoundary</enumname>
     <!-- <modifier role="enum_backing_type">string|int</modifier> -->
     
     <enumitem>
@@ -28,7 +28,7 @@
      </enumvalue>
      -->
      <enumitemdescription>
-      Description of enum case.
+      A right-open interval. The value of the left boundary lies within the interval, the value of the right boundary does not.
      </enumitemdescription>
     </enumitem>
 
@@ -41,7 +41,7 @@
      </enumvalue>
      -->
      <enumitemdescription>
-      Description of enum case.
+      A closed interval. The value of both boundaries lie within the interval.
      </enumitemdescription>
     </enumitem>
 
@@ -54,7 +54,7 @@
      </enumvalue>
      -->
      <enumitemdescription>
-      Description of enum case.
+      A left-open interval. The value of the left boundary does not lie within the interval, the value of the right boundary does.
      </enumitemdescription>
     </enumitem>
 
@@ -67,7 +67,7 @@
      </enumvalue>
      -->
      <enumitemdescription>
-      Description of enum case.
+      An open interval. The value of neither boundary lies within the interval.
      </enumitemdescription>
     </enumitem>
 
